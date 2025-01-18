@@ -1,0 +1,24 @@
+---
+permalink: concepts/privileges-required.html 
+sidebar: sidebar 
+keywords:  
+summary: I diversi strumenti ONTAP per le attività VMware vSphere richiedono diverse combinazioni di privilegi specifici per gli strumenti ONTAP per VMware vSphere e i privilegi nativi di vCenter Server. 
+---
+= Privilegi richiesti per gli strumenti ONTAP per le attività VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+I diversi strumenti ONTAP per le attività VMware vSphere richiedono diverse combinazioni di privilegi specifici per gli strumenti ONTAP per VMware vSphere e i privilegi nativi di vCenter Server.
+
+Per accedere agli strumenti ONTAP per la GUI di VMware vSphere, è necessario disporre del privilegio View specifico dei tool ONTAP a livello di prodotto assegnato al livello di oggetto vSphere corretto. Se si accede senza questo privilegio, gli strumenti ONTAP per VMware vSphere visualizzano un messaggio di errore quando si fa clic sull'icona NetApp e si impedisce l'accesso agli strumenti ONTAP.
+
+Nel privilegio *View*, è possibile accedere agli strumenti ONTAP per VMware vSphere. Questo privilegio non consente di eseguire attività all'interno degli strumenti ONTAP per VMware vSphere. Per eseguire qualsiasi strumento ONTAP per le attività VMware vSphere, è necessario disporre dei privilegi vCenter Server nativi e specifici per gli strumenti ONTAP per tali attività.
+
+Il livello di assegnazione determina le parti dell'interfaccia utente che è possibile visualizzare. L'assegnazione del privilegio Visualizza all'oggetto principale (cartella) consente di accedere agli strumenti ONTAP per VMware vSphere facendo clic sull'icona NetApp.
+
+È possibile assegnare il privilegio View a un altro livello di oggetto vSphere, tuttavia ciò limita gli strumenti ONTAP per i menu VMware vSphere che è possibile visualizzare e utilizzare.
+
+L'oggetto root è la posizione consigliata per assegnare qualsiasi autorizzazione contenente il privilegio View.

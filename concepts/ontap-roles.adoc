@@ -1,0 +1,41 @@
+---
+permalink: concepts/ontap-roles.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Puoi impostare diversi ruoli ONTAP consigliati per lavorare con gli strumenti ONTAP per VMware vSphere e il role-based access control \(RBAC\). Questi ruoli contengono i privilegi di ONTAP necessari per eseguire le necessarie operazioni di storage eseguite dagli strumenti ONTAP per le attività di VMware vSphere.' 
+---
+= Ruoli ONTAP consigliati per i tool ONTAP per VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile impostare diversi ruoli ONTAP consigliati per lavorare con gli strumenti ONTAP per VMware vSphere e RBAC (role-based access control). Questi ruoli contengono i privilegi di ONTAP necessari per eseguire le operazioni di storage eseguite dai tool ONTAP per i task VMware vSphere.
+
+Per creare nuovi ruoli utente, occorre accedere come amministratore dei sistemi storage che eseguono ONTAP. È possibile creare ruoli ONTAP utilizzando Gestione di sistema di ONTAP 9.8P1 o versioni successive.
+
+Ogni ruolo ONTAP dispone di una coppia di nome utente e password associata, che costituiscono le credenziali del ruolo. Se non si effettua l'accesso utilizzando queste credenziali, non è possibile accedere alle operazioni di storage associate al ruolo.
+
+Come misura di sicurezza, gli strumenti ONTAP per i ruoli ONTAP specifici di VMware vSphere sono ordinati gerarchicamente. Ciò significa che il primo ruolo è il più restrittivo e dispone solo dei privilegi associati al set più elementare di tool ONTAP per le operazioni di storage di VMware vSphere. Il ruolo successivo include i propri privilegi e tutti i privilegi associati al ruolo precedente. Ogni ruolo aggiuntivo è meno restrittivo delle operazioni di storage supportate.
+
+Di seguito sono elencati alcuni dei ruoli RBAC di ONTAP consigliati quando si utilizzano i tool ONTAP per VMware vSphere. Dopo aver creato questi ruoli, è possibile assegnarli agli utenti che devono eseguire attività correlate allo storage, ad esempio il provisioning di macchine virtuali.
+
+|===
+
+
+| *Ruolo* | *privilegi* 
+
+
+| Discovery (rilevamento) | Questo ruolo consente di aggiungere sistemi storage. 
+
+
+| Creare storage | Questo ruolo consente di creare storage. Questo ruolo include anche tutti i privilegi associati al ruolo di rilevamento. 
+
+
+| Modificare lo storage | Questo ruolo consente di modificare lo storage. Questo ruolo include anche tutti i privilegi associati al ruolo di rilevamento e al ruolo Crea archivio. 
+
+
+| Distruggere lo storage | Questo ruolo consente di distruggere lo storage. Questo ruolo include anche tutti i privilegi associati al ruolo di rilevamento, al ruolo Crea archivio e al ruolo Modifica archivio. 
+|===
+Se si utilizzano strumenti ONTAP per VMware vSphere, è necessario impostare anche un ruolo di gestione basata su criteri (PBM, Policy-Based Management). Questo ruolo consente di gestire lo storage utilizzando le policy di storage. Questo ruolo richiede anche la configurazione del ruolo "`DDiscovery`".

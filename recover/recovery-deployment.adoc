@@ -1,0 +1,61 @@
+---
+permalink: recover/recovery-deployment.html 
+sidebar: sidebar 
+keywords:  
+summary: Se perdi i tool di ONTAP per la configurazione di VMware vSphere e se il tuo ONTAP funziona, puoi ripristinare gli strumenti di ONTAP per la configurazione di VMware vSphere utilizzando ONTAP. Quando si perde la configurazione, abbassare la configurazione senza problemi. 
+---
+= Ripristina i tool ONTAP per la configurazione di VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In caso di perdita dei tool ONTAP per la configurazione di VMware vSphere, sarà possibile ripristinare i tool ONTAP per la configurazione di VMware vSphere utilizzando i dati disponibili nel volume ONTAP. Quando si perde la configurazione, abbassare la configurazione senza problemi.
+
+
+NOTE: Non puoi ripristinare i tool ONTAP per la configurazione di VMware vSphere in caso di problemi con vCenter Server o il software di gestione dei dati ONTAP.
+
+*Fasi*
+
+. Accedere al server vSphere.
+. Passare al pool di risorse creato o al cluster di nodi o all'host in cui si desidera distribuire l'OVA.
+. Fare clic con il pulsante destro del mouse sulla posizione desiderata e selezionare *Deploy OVF template* (distribuire modello OVF*).
+. Selezionare il file OVA tramite l'URL per il file _.ova_ o navigare alla cartella in cui è stato salvato il file _.ova_, quindi fare clic su *Avanti*.
++
+
+NOTE: È necessario utilizzare la stessa build OVA utilizzata per l'installazione della configurazione di ripristino.
+
+. Selezionare un nome e una cartella per la macchina virtuale e selezionare *Avanti*.
+. Selezionare l'host e selezionare *Avanti*.
+. Rivedere il riepilogo del modello e selezionare *Avanti*.
+. Leggere e accettare il contratto di licenza e selezionare *Avanti*.
+. Nella finestra *Configurazione*, selezionare l'opzione *Ripristino*.
+. Nella finestra *Seleziona archiviazione*, selezionare lo spazio di archiviazione per le configurazioni e i file del disco.
+. Nella finestra *Seleziona reti*, selezionare una rete di destinazione per ciascuna rete di origine.
++
+
+NOTE: Devi mantenere l'indirizzo IP del bilanciatore del carico e l'indirizzo IP del Kubernetes API Server. È possibile modificare l'indirizzo IP del nodo oppure mantenere lo stesso indirizzo IP.
+
+. Nella finestra *Personalizza modello*, immettere i dettagli richiesti e fare clic su *Avanti*
++
+
+NOTE: Una volta abilitato l'ambito SVM, dovresti aver già abilitato il supporto SVM con l'indirizzo IP di gestione.
+
+. Rivedere i dettagli nella finestra *Pronto per il completamento*, selezionare *fine*.
++
+Quando viene creata l'attività di distribuzione, l'avanzamento viene visualizzato nella barra delle applicazioni di vSphere.
+
+. Accendere la macchina virtuale dopo il completamento dell'attività.
++
+L'installazione viene avviata. È possibile tenere traccia dell'avanzamento dell'installazione nella console Web della VM. Come parte dell'installazione, le configurazioni dei nodi sono validate. Gli input forniti nelle diverse sezioni del modello Personalizza nel modulo OVF vengono convalidati. In caso di discrepanze, viene visualizzata una finestra di dialogo che richiede di intraprendere un'azione correttiva.
+
+. Apportare le modifiche necessarie nella finestra di dialogo. Utilizzare il pulsante Tab per spostarsi all'interno del pannello e selezionare *OK*.
++
+I valori forniti vengono nuovamente convalidati. Gli strumenti ONTAP per VMware vSphere consentono di correggere tre tentativi di valori non validi. Se dopo tre tentativi non è possibile risolvere i problemi, l'installazione del prodotto si interrompe e si consiglia di provare a eseguire l'installazione su una nuova VM.
+
+
+
+Una volta completata l'installazione, la console Web mostra lo stato degli strumenti ONTAP per VMware vSphere.
+
+Una volta completata l'installazione, è necessario modificare manualmente i requisiti hardware in base alle linee guida riportate nella link:../deploy/prerequisites.html["Prerequisiti per la distribuzione degli strumenti ONTAP per VMware vSphere"] pagina.

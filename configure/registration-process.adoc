@@ -1,0 +1,54 @@
+---
+permalink: configure/registration-process.html 
+sidebar: sidebar 
+keywords:  
+summary: 'È possibile registrare e annullare la registrazione del provider VASA con un"istanza di vCenter Server utilizzando gli strumenti ONTAP per l"interfaccia di plug-in remoto di VMware vSphere.' 
+---
+= Registrare il provider VASA con un'istanza di vCenter Server
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile registrare e annullare la registrazione del provider VASA con un'istanza di vCenter Server utilizzando gli strumenti ONTAP per l'interfaccia di plug-in remoto di VMware vSphere. La sezione Impostazioni provider VASA mostra lo stato di registrazione provider VASA per vCenter Server selezionato.
+
+*Fasi*
+
+. Accedere al client vSphere utilizzando `\https://vcenterip/ui`
+. Nella pagina dei collegamenti, fare clic su *NetApp ONTAP tools* nella sezione dei plug-in.
+. Selezionare *Impostazioni* > *Impostazioni provider VASA*. Lo stato di registrazione del provider VASA viene visualizzato come non registrato.
+. Fare clic sul pulsante *registra* per registrare il provider VASA.
+. Immettere un nome per il provider VASA e fornire gli strumenti ONTAP per le credenziali utente dell'applicazione VMware vSphere, quindi fare clic su *REGISTRA*.
+. Una volta completata la registrazione e l'aggiornamento della pagina, l'interfaccia utente mostra lo stato, il nome e la versione del provider VASA registrato. L'azione di annullamento della registrazione è attivata.
+. Se si desidera annullare la registrazione del provider VASA, attenersi alla seguente procedura:
++
+.. Per annullare la registrazione del provider VASA, selezionare l'opzione *Annulla registrazione* nella parte inferiore della schermata.
+.. Nella pagina *Unregister VASA provider*, è possibile vedere il nome del provider VASA. In questa pagina, fornire le credenziali utente dell'applicazione e fare clic su *Annulla registrazione*.
+
+
+
+
+*Al termine*
+
+Verificare che il provider VASA integrato sia elencato sotto VASA Provider dall'interfaccia utente del client vCenter e dall'interfaccia utente del plug-in remoto.
+
+*Fasi*
+
+. Per verificare VASA Provider dall'interfaccia utente del client vCenter, attenersi alla seguente procedura:
++
+.. Accedere a vCenter Server.
+.. Accedere con le credenziali di amministratore.
+.. Selezionare *fornitori di archiviazione*.
+.. Selezionare *Configura*.
+.. Nella sezione relativa ai backend storage/provider di storage, verificare che il provider VASA integrato sia elencato correttamente.
+
+
+. Per verificare il provider VASA dall'interfaccia utente del plug-in remoto, attenersi alla seguente procedura:
++
+.. Accedere al client vSphere utilizzando `\https://vcenterip/ui`
+.. Nella pagina dei collegamenti, fare clic su *NetApp ONTAP tools* nella sezione dei plug-in.
+.. È possibile visualizzare il provider VASA registrato nella pagina panoramica e nella pagina *Impostazioni* > *Impostazioni provider VASA*.
+
+
+

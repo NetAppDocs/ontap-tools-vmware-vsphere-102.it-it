@@ -1,0 +1,34 @@
+---
+permalink: configure/configure-esx-server-multipath-and-timeout-settings.html 
+sidebar: sidebar 
+keywords:  
+summary: 'I tool ONTAP per VMware vSphere controllano e impostano le impostazioni di multipathing dell"host ESXi e le impostazioni di timeout degli HBA più adatte ai sistemi storage NetApp.' 
+---
+= Configurare le impostazioni di multipath e timeout del server ESXi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+I tool ONTAP per VMware vSphere controllano e impostano le impostazioni di multipath host ESXi e le impostazioni di timeout HBA che funzionano meglio con i sistemi storage NetApp.
+
+*A proposito di questa attività*
+
+Questo processo potrebbe richiedere molto tempo, a seconda della configurazione e del carico di sistema. L'avanzamento dell'attività viene visualizzato nel pannello Recent Tasks (attività recenti). Una volta completate le attività, l'icona Avviso di stato dell'host viene sostituita dall'icona normale o dall'icona di riavvio in sospeso.
+
+*Fasi*
+
+. Nella home page del client Web VMware vSphere, fare clic su *host e cluster*.
+. Fare clic con il pulsante destro del mouse su un host e selezionare *NetApp ONTAP tools* > *Aggiorna dati host*.
+. Nella pagina dei collegamenti, fare clic su *NetApp ONTAP tools* nella sezione dei plug-in.
+. Accedere alla scheda di conformità host ESXi nella Panoramica (dashboard) dei tool ONTAP per il plug-in VMware vSphere.
+. Selezionare il collegamento *Applica impostazioni consigliate*.
+. Nella finestra *Apply Recommended host settings* (Applica impostazioni host consigliate), selezionare gli host che si desidera rispettare con le impostazioni dell'host consigliate da NetApp e fare clic su *Next* (Avanti).
++
+
+NOTE: È possibile espandere l'host ESXi per visualizzare i valori correnti.
+
+. Nella pagina delle impostazioni, selezionare i valori consigliati secondo necessità.
+. Nel riquadro di riepilogo, controllare i valori e fare clic su *fine*. È possibile tenere traccia dell'avanzamento nel riquadro attività recenti.
+

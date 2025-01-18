@@ -1,0 +1,228 @@
+---
+permalink: configure/configure-user-role-and-privileges.html 
+sidebar: sidebar 
+keywords: user roles 
+summary: È possibile configurare nuovi ruoli utente per la gestione dei backend di storage utilizzando il file JSON fornito con i tool ONTAP per VMware vSphere e ONTAP System Manager. 
+---
+= Configurare i ruoli e i privilegi degli utenti ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile configurare nuovi ruoli e privilegi utente per la gestione dei backend di storage utilizzando il file JSON fornito con gli strumenti ONTAP per VMware vSphere e ONTAP System Manager.
+
+*Cosa ti serve*
+
+* È necessario aver scaricato il file dei privilegi di ONTAP da ONTAP Tools per VMware vSphere utilizzando _\https://<loadbalancerIP>:8443/Virtualization/user-Privileges/users_roles.zip_.
+* Il file ONTAP Privileges dovrebbe essere stato scaricato da ONTAP Tools utilizzando `\https://<loadbalancerIP>:8443/virtualization/user-privileges/users_roles.zip`.
++
+
+NOTE: È possibile creare utenti a livello di cluster o direttamente a livello di Storage Virtual Machine (SVM). Puoi anche creare utenti senza utilizzare il file user_roles.json e, in tal caso, devi disporre di un set minimo di privilegi a livello di SVM.
+
+* È necessario aver effettuato l'accesso con i privilegi di amministratore per il backend di archiviazione.
+
+
+*Fasi*
+
+. Estrarre il file scaricato _\https://<loadbalancerIP>:8443/Virtualization/user-privileges/users_roles.zip_.
+. Accedere a ONTAP System Manager utilizzando l'indirizzo IP di gestione del cluster del cluster.
+. Accedi al cluster con admin Privileges. Per configurare un utente, attenersi alla procedura illustrata di seguito:
++
+.. Per configurare l'utente degli strumenti ONTAP del cluster, selezionare *cluster* > *Impostazioni* > *pannello utenti e ruoli*.
+.. Per configurare l'utente degli strumenti di SVM ONTAP, selezionare *Storage SVM* > *Impostazioni* > *pannello utenti e ruoli*.
+.. Selezionare *Aggiungi* in utenti.
+.. Nella finestra di dialogo *Aggiungi utente*, selezionare *prodotti di virtualizzazione*.
+.. *Sfoglia* per selezionare e caricare il file JSON con privilegi ONTAP.
++
+Il campo prodotto viene compilato automaticamente.
+
+.. Selezionare la funzionalità desiderata dal menu a discesa funzionalità prodotto.
++
+Il campo *ruolo* viene compilato automaticamente in base alla capacità del prodotto selezionata.
+
+.. Immettere il nome utente e la password richiesti.
+.. Selezionare i privilegi (rilevamento, Crea archivio, Modifica archivio, archiviazione distrutta, ruolo NAS/SAN) richiesti per l'utente, quindi fare clic su *Aggiungi*.
+
+
+
+
+Vengono aggiunti il nuovo ruolo e l'utente e vengono visualizzati i privilegi dettagliati nel ruolo configurato.
+
+
+NOTE: L'operazione di disinstallazione non rimuove i ruoli dello strumento ONTAP, ma rimuove i nomi localizzati per Privileges specifico dello strumento ONTAP e aggiunge il prefisso `XXX missing privilege`. Quando si reinstallano gli strumenti ONTAP per VMware vSphere o si esegue l'aggiornamento a una versione più recente, vengono ripristinati tutti gli strumenti ONTAP standard per i ruoli VMware vSphere e i privilegi specifici degli strumenti ONTAP.
+
+
+
+== Requisiti di mappatura degli aggregati delle SVM
+
+Per utilizzare le credenziali utente delle SVM per il provisioning dei datastore, i tool interni di ONTAP per VMware vSphere creano volumi nell'aggregato specificato nelle API SUCCESSIVE ai datastore. ONTAP non consente la creazione di volumi su aggregati non mappati in una SVM utilizzando le credenziali utente della SVM. Per risolvere questo problema, è necessario mappare le SVM con gli aggregati utilizzando l'API REST o la CLI di ONTAP, come descritto qui.
+
+API REST:
+
+[listing]
+----
+PATCH "/api/svm/svms/f16f0935-5281-11e8-b94d-005056b46485" '{"aggregates":{"name":["aggr1","aggr2","aggr3"]}}'
+----
+CLI ONTAP:
+
+[listing]
+----
+sti115_vsim_ucs630f_aggr1 vserver show-aggregates                                        AvailableVserver        Aggregate      State         Size Type    SnapLock Type-------------- -------------- ------- ---------- ------- --------------svm_test       sti115_vsim_ucs630f_aggr1                               online     10.11GB vmdisk  non-snaplock
+----
+
+
+== Creare manualmente un utente e un ruolo ONTAP
+
+Seguire le istruzioni in questa sezione per creare manualmente l'utente e i ruoli senza utilizzare il file JSON.
+
+. Accedere a ONTAP System Manager utilizzando l'indirizzo IP di gestione del cluster del cluster.
+. Accedi al cluster con admin Privileges.
++
+.. Per configurare i ruoli degli strumenti ONTAP del cluster, selezionare *cluster* > *Impostazioni* > *utenti e ruoli*.
+.. Per configurare i ruoli degli strumenti di SVM ONTAP del cluster, selezionare *Storage SVM* > *Impostazioni* > *pannello utenti e ruoli*
+
+
+. Crea ruoli:
++
+.. Selezionare *Aggiungi* nella tabella *ruoli*.
+.. Immettere i dettagli *nome ruolo* e *attributi ruolo*.
++
+Aggiungere il percorso *REST API* e il relativo accesso dal menu a discesa.
+
+.. Aggiungere tutte le API necessarie e salvare le modifiche.
+
+
+. Crea utenti:
++
+.. Selezionare *Aggiungi* nella tabella *utenti*.
+.. Nella finestra di dialogo *Aggiungi utente*, selezionare *System Manager*.
+.. Immettere il *Nome utente*.
+.. Selezionare *ruolo* dalle opzioni create nel passaggio *Crea ruoli* riportato sopra.
+.. Immettere le applicazioni a cui assegnare l'accesso e il metodo di autenticazione. ONTAPI e HTTP sono le applicazioni richieste e il tipo di autenticazione è *Password*.
+.. Impostare *Password per l'utente* e *Salva* l'utente.
+
+
+
+
+
+
+== Elenco dei privilegi minimi richiesti per gli utenti cluster con ambito globale non amministratori
+
+In questa sezione sono elencati i privilegi minimi richiesti per gli utenti cluster con ambito globale non amministratore creati senza utilizzare il file JSON degli utenti. Se un cluster viene aggiunto nell'ambito locale, si consiglia di utilizzare il file JSON per creare gli utenti, poiché gli strumenti ONTAP per VMware vSphere richiedono più dei soli privilegi di lettura per il provisioning su ONTAP.
+
+Utilizzo delle API:
+
+|===
+
+
+| API | Livello di accesso | Utilizzato per 
+
+
+| /api/cluster | Sola lettura | Rilevamento della configurazione del cluster 
+
+
+| /api/cluster/licenze/licenze | Sola lettura | Controllo licenza per licenze specifiche del protocollo 
+
+
+| /api/cluster/nodi | Sola lettura | Rilevamento del tipo di piattaforma 
+
+
+| /api/storage/aggregati | Sola lettura | Controllo dello spazio di aggregazione durante datastore/provisioning dei volumi 
+
+
+| /api/storage/cluster | Sola lettura | Per ottenere i dati di spazio ed efficienza a livello di cluster 
+
+
+| /api/storage/dischi | Sola lettura | Per ottenere i dischi associati in un aggregato 
+
+
+| /api/storage/qos/policy | Lettura/creazione/Modifica | Gestione di QoS e policy VM 
+
+
+| /api/svm/svm | Sola lettura | Per ottenere la configurazione SVM nel caso in cui il cluster venga aggiunto localmente. 
+
+
+| /api/network/ip/interfaces | Sola lettura | Aggiunta del backend dello storage - per identificare l'ambito della LIF di gestione è Cluster/SVM 
+
+
+| /api | Sola lettura | Gli utenti del cluster devono avere questo privilegio per ottenere il corretto stato di backend dello storage. In caso contrario, Gestione strumenti di ONTAP mostra lo stato di backend dello storage "sconosciuto". 
+|===
+
+
+== Aggiorna i tool ONTAP per VMware vSphere 10,1 a un utente 10,2
+
+Se i tool di ONTAP per l'utente di VMware vSphere 10,1 sono un utente con ambito cluster creato utilizzando il file json, esegui i seguenti comandi nell'interfaccia dell'interfaccia dell'interfaccia dell'interfaccia dell'utente di ONTAP utilizzando l'utente di amministrazione per l'upgrade alla release 10,2.
+
+Per le funzionalità del prodotto:
+
+* VSC
+* Provider VSC e VASA
+* VSC e SRA
+* VSC, VASA Provider e SRA.
+
+
+Privileges cluster:
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme namespace show" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem show" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem host show" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem map show" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme show-interface" -access read_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem host add" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem map add" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme namespace delete" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem delete" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem host remove" -access all_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem map remove" -access all_
+
+Se i tool di ONTAP per l'utente di VMware vSphere 10,1 sono un utente con ambito SVM creato utilizzando il file json, esegui i seguenti comandi nell'interfaccia dell'interfaccia dell'interfaccia dell'interfaccia dell'interfaccia utente di ONTAP utilizzando l'utente di amministrazione per l'upgrade alla release 10,2.
+
+Privileges SVM:
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme namespace show" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem show" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem host show" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem map show" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme show-interface" -access read -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem host add" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem map add" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme namespace delete" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem delete" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem host remove" -access all -vserver <vserver-name>_
+
+_security login role create -role <existing-role-name> -cmddirname "vserver nvme subsystem map remove" -access all -vserver <vserver-name>_
+
+Aggiungendo al ruolo esistente il comando _vserver nvme namespace show_ e _vserver nvme subsystem show_, si aggiungono i seguenti comandi.
+
+[listing]
+----
+vserver nvme namespace create
+
+vserver nvme namespace modify
+
+vserver nvme subsystem create
+
+vserver nvme subsystem modify
+
+----

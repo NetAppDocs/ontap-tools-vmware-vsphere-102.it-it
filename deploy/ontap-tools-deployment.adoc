@@ -1,0 +1,159 @@
+---
+permalink: deploy/ontap-tools-deployment.html 
+sidebar: sidebar 
+keywords:  
+summary: È possibile configurare un singolo nodo non ha in configurazioni piccole o medie. 
+---
+= Implementa i tool ONTAP per VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puoi implementare i tool ONTAP per VMware vSphere in due configurazioni:
+
+* Configurazione a nodo singolo non ha
+* Configurazione HA
+
+
+[role="tabbed-block"]
+====
+.Configurazione a nodo singolo non ha
+--
+È possibile implementare una configurazione a nodo singolo non ha in configurazioni piccole o medie.
+
+* La configurazione piccola non ha contiene 8 CPU e 16 GB di RAM.
+* La configurazione media non ha contiene 12 CPU e 24 GB di RAM.
+
+
+*Prima di iniziare*
+
+Assicurarsi che il percorso di rete sia presente. La rete di dati dello storage deve essere accessibile dalla rete di gestione delle macchine virtuali. Ad esempio, accedere a ONTAP > eseguire il comando _network route create -vserver <SVM> -destination 0,0.0.0/0 -gateway <gateway_ip>_
+
+*Fasi*
+
+. Scaricare il `.zip` file contenente i file binari (_.ova_) e i certificati firmati per gli strumenti ONTAP per VMware vSphere dal https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Sito di supporto NetApp"^] .
+. Accedere al server vSphere.
+. Passare al pool di risorse creato, al cluster o all'host in cui si desidera distribuire l'OVA.
+. Fare clic con il pulsante destro del mouse sulla posizione desiderata e selezionare *Deploy OVF template...* (distribuire modello OVF...).
++
+
+NOTE: Non implementare i tool ONTAP per la macchina virtuale VMware vSphere in un datastore vVol gestito dal reparto IT.
+
+. Selezionare il file OVA tramite l'URL per il file _.ova_ o navigare alla cartella in cui è stato salvato il file _.ova_, quindi fare clic su *Avanti*.
+. Selezionare una risorsa di computer e fare clic su *Avanti*.
+. Esaminare i dettagli del modello e fare clic su *Avanti*.
+. Leggere e accettare il contratto di licenza.
+. Selezionare la configurazione di distribuzione e fare clic su *Avanti*.
++
+Le opzioni di implementazione avanzate utilizzano Trident come provisioner di storage dinamico per ONTAP per creare volumi e la semplice implementazione usa lo storage locale per creare volumi.
+
+. Selezionare lo spazio di archiviazione per la configurazione e i file del disco e fare clic su *Avanti*.
+. Selezionare la rete di destinazione per ciascuna rete di origine e fare clic su *Avanti*.
+. Nel modello *Personalizza*, immettere i dettagli richiesti e fare clic su *Avanti*
++
+** Una volta abilitato l'ambito SVM, dovresti aver già abilitato il supporto SVM con l'indirizzo IP di gestione.
+** Le informazioni qui fornite sono convalidate per i modelli corretti durante il processo di installazione. In caso di discrepanza, viene visualizzato un messaggio di errore sulla console Web e viene richiesto di correggere eventuali informazioni errate fornite.
+** I nomi host devono essere costituiti da lettere maiuscole (A-Z), lettere minuscole (a-z), cifre (0-9) o dal trattino (-). Se si desidera configurare lo stack doppio, specificare il nome host mappato all'indirizzo IPv6.
++
+
+NOTE: Pure IPv6 non è supportato. La modalità mista è supportata con VLAN con indirizzi IPv6 e IPv4.
+
+
+
+. Rivedere i dettagli nella finestra *Pronto per il completamento*, selezionare *fine*.
++
+Quando viene creata l'attività di distribuzione, l'avanzamento viene visualizzato nella barra delle applicazioni di vSphere.
+
+. Accendere la macchina virtuale dopo il completamento dell'attività.
+
+
+--
+.Configurazione HA
+--
+È possibile configurare tre nodi ha in configurazioni piccole, medie o grandi. L'implementazione HA utilizza Trident per memorizzare i dati dei servizi.
+
+* I tre nodi ha di piccole dimensioni contengono 8 CPU e 16 GB di RAM per nodo.
+* I tre nodi ha di medie dimensioni contengono 12 CPU e 24 GB di RAM per nodo.
+* I tre nodi ad alta disponibilità di grandi dimensioni contengono 16 CPU e 32 GB di RAM per nodo.
+
+
+*Prima di iniziare*
+
+Questa attività offre istruzioni su come installare tre nodi ha in configurazioni piccole, medie o elevate.
+
+La creazione della libreria di contenuti è un prerequisito obbligatorio per la distribuzione della configurazione ha a tre nodi. Una libreria di contenuti in VMware è un oggetto contenitore che memorizza modelli di VM, modelli di vApp e altri tipi di file. La distribuzione con la libreria di contenuti offre un'esperienza senza problemi poiché non dipende dalla connettività di rete.
+
+
+NOTE: È necessario archiviare la libreria di contenuti in un datastore condiviso, in modo che tutti gli host di un cluster possano accedervi. È necessario creare una libreria di contenuti per memorizzare l'OVA prima di distribuire l'OVA nella configurazione ha.
+
+
+NOTE: Il modello della libreria di contenuti una volta caricato non deve essere eliminato dopo la distribuzione, poiché verrà utilizzato durante i riavvii.
+
+Creare la libreria di contenuti utilizzando i seguenti passaggi:
+
+. Scaricare il `.zip` file contenente i file binari (_.ova_) e i certificati firmati per gli strumenti ONTAP per VMware vSphere dal https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Sito di supporto NetApp"^] .
+. Accedere al client vSphere utilizzando `\https://vcenterip/ui`
+. Selezionare i puntini di sospensione orizzontali accanto al client vSphere e selezionare *Libreria di contenuti*.
+. Selezionare *Crea* a destra della pagina.
+. Fornire un nome per la libreria e creare la libreria di contenuti.
+. Accedere alla libreria di contenuti creata.
+. Selezionare *azioni* nella parte destra della pagina e selezionare *Importa elemento* e importare il file OVA.
+
+
+
+NOTE: Per ulteriori informazioni, consulta il https://blogs.vmware.com/vsphere/2020/01/creating-and-using-content-library.html["Creazione e utilizzo della libreria di contenuti"] blog.
+
+Assicurati di aver importato il tuo OVA nella tua libreria di contenuti. Tenere a portata di mano il nome della libreria dei contenuti e dell'elemento della libreria fornito all'elemento OVA.
+
+
+NOTE: Prima di procedere con la distribuzione, impostare il DRS (Distributed Resource Scheduler) del cluster sull'inventario su 'Conservative' durante l'installazione degli strumenti ONTAP. In questo modo si garantisce che le VM non vengano migrate durante l'installazione.
+
+*Fasi*
+
+. Scaricare il `.zip` file contenente i file binari (_.ova_) e i certificati firmati per gli strumenti ONTAP per VMware vSphere dal https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Sito di supporto NetApp"^] .
+. Accedere al server vSphere.
+. Passare al pool di risorse creato, al cluster o all'host in cui si desidera distribuire l'OVA.
+. Fare clic con il pulsante destro del mouse sulla posizione desiderata e selezionare *Deploy OVF template...* (distribuire modello OVF...).
++
+
+NOTE: Non implementare i tool ONTAP per la macchina virtuale VMware vSphere in un datastore vVol gestito dal reparto IT.
+
+. Selezionare il file OVA tramite l'URL per il file _.ova_ o navigare alla cartella in cui è stato salvato il file _.ova_, quindi fare clic su *Avanti*.
+. Per implementare i tool ONTAP per VMware vSphere dall'archivio di contenuti:
++
+.. Vai alla tua libreria di contenuti e fai clic sull'elemento della libreria che desideri distribuire.
+.. Fare clic su *azioni* > *Nuova VM da questo modello*
+
+
+. Selezionare una risorsa di computer e fare clic su *Avanti*.
+. Esaminare i dettagli del modello e fare clic su *Avanti*.
+. Leggere e accettare il contratto di licenza e fare clic su *Avanti*.
+. Selezionare la configurazione di distribuzione e fare clic su *Avanti*.
+. Selezionare lo spazio di archiviazione per la configurazione e i file del disco e fare clic su *Avanti*.
+. Selezionare la rete di destinazione per ciascuna rete di origine e fare clic su *Avanti*.
+. Nella finestra *Personalizza modello*, compilare i campi obbligatori e fare clic su *Avanti*.
++
+** In modalità di implementazione ha, non rinominare i nomi delle VM dopo l'implementazione.
+** Una volta abilitato l'ambito SVM, dovresti aver già abilitato il supporto SVM con l'indirizzo IP di gestione.
+** Le informazioni qui fornite sono convalidate per i modelli corretti durante il processo di installazione. In caso di discrepanza, viene visualizzato un messaggio di errore sulla console Web e viene richiesto di correggere eventuali informazioni errate fornite.
+** I nomi host devono essere costituiti da lettere maiuscole (A-Z), lettere minuscole (a-z), cifre (0-9) o dal trattino (-). Se si desidera configurare lo stack doppio, specificare il nome host mappato all'indirizzo IPv6.
++
+
+NOTE: Pure IPv6 non è supportato. La modalità mista è supportata con VLAN con indirizzi IPv6 e IPv4.
+
+
+
+. Rivedere i dettagli nella finestra *Pronto per il completamento*, selezionare *fine*.
++
+Quando viene creata l'attività di distribuzione, l'avanzamento viene visualizzato nella barra delle applicazioni di vSphere.
+
+. Accendere la macchina virtuale dopo il completamento dell'attività.
+
+
+--
+====
+È possibile tenere traccia dell'avanzamento dell'installazione nella console Web della VM.
+
+In caso di discrepanze nei valori immessi nel modulo OVF, viene visualizzata una finestra di dialogo che richiede di intraprendere un'azione correttiva. Apportare le modifiche necessarie all'interno della finestra di dialogo, utilizzando il pulsante Tab per navigare e selezionare "OK". Hai tre tentativi per risolvere eventuali problemi. Se i problemi persistono dopo tre tentativi, il processo di installazione verrà interrotto e si consiglia di riprovare l'installazione su una nuova VM.

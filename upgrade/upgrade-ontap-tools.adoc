@@ -1,0 +1,79 @@
+---
+permalink: upgrade/upgrade-ontap-tools.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: 'L"aggiornamento è supportato per le implementazioni ha e non ha.' 
+---
+= Aggiornamento dai tool ONTAP per VMware vSphere 10.x alla 10,2
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'aggiornamento è supportato per le implementazioni ha e non ha.
+
+
+NOTE: Per eseguire l'upgrade dai tool ONTAP per VMware vSphere 10,0 alla release 10,2, è necessario prima eseguire l'upgrade ai tool ONTAP per VMware vSphere 10,1, quindi alla release 10,2.
+
+*Prima di iniziare*
+
+Se si esegue l'aggiornamento dagli strumenti ONTAP per VMware vSphere 10,0 a 10,1, è necessario completare i seguenti passaggi prima di procedere con l'attività di aggiornamento:
+
+*Attiva diagnostica*
+
+. Da vCenter Server, aprite una console agli strumenti ONTAP.
+. Accedere come utente di manutenzione.
+. Immettere *4* per selezionare supporto e diagnostica.
+. Immettere *2* per selezionare attiva accesso di diagnostica remota.
+. Immettere *y* per impostare la password desiderata.
+. Accedere all'indirizzo IP della VM dal terminale/putty con l'utente come 'diag' e la password impostata nel passaggio precedente.
+
+
+*Esegui il backup di MongoDB*
+
+Esegui i seguenti comandi per eseguire un backup di MongoDB:
+
+* kn exec -it ntv-mongodb-0 sh - kn è un alias di kubectl -n ntv-system.
+* Env | grep MONGODB_ROOT_PASSWORD - esegui questo comando all'interno del pod.
+* 'esci' - eseguire questa operazione per uscire dal pod.
+* KN exec ntv-mongodb-0 --mongodump -u root -p MONGODB_ROOT_PASSWORD --archive=/tmp/mongodb-backup.gz --gzip - esegui questo comando per sostituire MONGO_ROOT_PASSWORD set dal comando precedente.
+* kn cp ntv-mongodb-0:/tmp/mongodb-backup.gz ./mongodb-backup.gz - eseguire questo comando per copiare il backup mongodb creato utilizzando il comando sopra riportato da pod all'host.
+
+
+*Acquisire l'istantanea di tutti i volumi*
+
+* Eseguire il comando 'kN get pvc' e salvare l'output del comando.
+* Acquisire snapshot di tutti i volumi uno alla volta utilizzando uno dei seguenti metodi:
++
+** Dalla CLI, eseguire il comando _volume snapshot create -vserver <vserver_name> -volume <volume_name> -snapshot <snapshot_name>_
+** Dall'interfaccia utente di ONTAP System Manager, cercare il volume in base al nome nella barra di ricerca, quindi aprire il volume facendo clic sul nome. Andare allo snapshot e aggiungere lo snapshot di quel volume.
+
+
+
+
+*Istantanea degli strumenti ONTAP per le VM VMware vSphere in vCenter (3VMs in caso di implementazione ha, 1 VM in caso di distribuzione non ha)*
+
+* Nell'interfaccia utente del client vSphere, selezionare la VM.
+* Andare alla scheda istantanee e fare clic sul pulsante *scatta istantanea*.
+
+
+Prima di eseguire l'aggiornamento, eliminare i pod completati con il prefisso "generate-support-bundle-job". Se è in corso la generazione del bundle di supporto, attendere che venga completato, quindi eliminare il pod.
+
+*Fasi*
+
+. Carica gli strumenti ONTAP per l'aggiornamento ISO di VMware vSphere nella libreria di contenuti.
+. Nella pagina principale della macchina virtuale, selezionare *azioni* > *Modifica impostazioni*
+. Nella finestra di modifica delle impostazioni sotto il campo *unità CD/DVD*, selezionare file ISO della libreria di contenuti.
+. Selezionare il file ISO e fare clic su *OK*. Selezionare la casella di controllo connesso nel campo *unità CD/DVD*. image:../media/primaryvm-edit-settings.png["Modificare le impostazioni"]
+. Da vCenter Server, aprite una console agli strumenti ONTAP.
+. Accedere come utente di manutenzione.
+. Immettere *3* per selezionare il menu Configurazione di sistema.
+. Immettere *7* per selezionare l'opzione di aggiornamento.
+. Quando si esegue l'aggiornamento, le seguenti azioni vengono eseguite automaticamente:
++
+.. Aggiornamento del certificato
+.. Aggiornamento del plug-in remoto
+
+
+

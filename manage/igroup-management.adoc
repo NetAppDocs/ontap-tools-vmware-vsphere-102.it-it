@@ -1,0 +1,28 @@
+---
+permalink: manage/igroup-management.html 
+sidebar: sidebar 
+keywords:  
+summary: 'In ONTAP, le policy di esportazione vengono utilizzate per fornire l"accesso al percorso dei dati del volume agli host, mentre gli igroup vengono utilizzati per fornire l"accesso al percorso dei dati LUN agli host ESXi.' 
+---
+= Gestire gli igroup e i criteri di esportazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In ONTAP, le policy di esportazione vengono utilizzate per fornire l'accesso al percorso dei dati del volume agli host, mentre gli igroup (Initiator group) vengono utilizzati per fornire l'accesso al percorso dei dati LUN (Logical Unit Number) agli host ESXi. Gli strumenti ONTAP per VMware vSphere rendono semplice e intuitiva la creazione di igroup e offrono flussi di lavoro end-to-end completi. Per garantire la coerenza, la creazione diretta di iGroup sulle piattaforme di storage non è supportata.
+
+Quando i datastore di volumi virtuali vengono creati o montati sugli host in vCenter Server, gli host devono poter accedere ai volumi (NFS) o alle LUN (iSCSI), a seconda del tipo di protocollo del datastore.
+
+Il criterio di esportazione è dinamico e il nuovo criterio di esportazione viene creato con il formato di denominazione trident-uid. In Gestione sistema di ONTAP, accedere a *archiviazione* > *VM di archiviazione* > *[nome VM di archiviazione]* > *Impostazioni* > *Criteri di esportazione* per visualizzare i criteri di esportazione.
+
+Gli igroup e le policy di esportazione degli strumenti ONTAP per VMware vSphere sono gestiti in modo efficiente e offrono i seguenti vantaggi:
+
+* Supporta i criteri di esportazione migrati e gli igroup.
+* Nessuna interruzione delle operazioni di input e output della macchina virtuale.
+* Supporta il montaggio su host aggiuntivi senza intervento manuale.
+* Riduce al minimo la necessità di gestire il numero di igroup e le policy di esportazione.
+* Un Garbage Collector elimina automaticamente tutti gli igroup gestiti non utilizzati e i criteri di esportazione periodicamente.
+* Se il provisioning di un datastore a livello del cluster host viene eseguito, igroup viene creato con tutti gli initiator dell'host nel cluster host che vengono aggiunti all'igroup.
+

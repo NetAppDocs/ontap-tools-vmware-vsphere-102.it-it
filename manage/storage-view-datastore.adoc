@@ -1,0 +1,59 @@
+---
+permalink: manage/storage-view-datastore.html 
+sidebar: sidebar 
+keywords: Remove vVol datastore 
+summary: La vista dello storage ONTAP nella scheda Configure di un tool ONTAP per VMware vSphere mette a disposizione dati relativi al datastore e al relativo volume. 
+---
+= Viste dello storage ONTAP per datastore
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La vista dello storage ONTAP nella scheda Configure dei tool ONTAP per VMware vSphere offre dati relativi ai datastore e al loro volume. Questa vista fornisce la vista laterale dello storage del datastore.
+
+
+
+== Viste dello storage ONTAP per datastore NFS
+
+.Fasi
+. Dal client vSphere, accedere al datastore NFS.
+. Fare clic sulla scheda *Configura* nel riquadro di destra.
+. Selezionare *NetApp ONTAP tools* > *archiviazione ONTAP*. Nel riquadro destro vengono visualizzati i dettagli *Storage details* e *NFS details*.
++
+** Questa pagina contiene informazioni sui backend, gli aggregati e i volumi di storage.
+** La pagina dei dettagli di NFS contiene dati correlati al datastore NFS.
+
+
+
+
+
+
+== Viste dello storage ONTAP per datastore VMFS
+
+.Fasi
+. Dal client vSphere, accedere al datastore VMFS.
+. Fare clic sulla scheda *Configura* nel riquadro di destra.
+. Selezionare *NetApp ONTAP tools* > *archiviazione ONTAP*. Nel riquadro destro vengono visualizzati i dettagli *Storage details* e *LUN details* o *namespace details* in caso di protocollo NVMe/TCP o NVMe/FC.
++
+** Questa pagina contiene informazioni sui backend, gli aggregati e i volumi di storage.
+** La pagina dei dettagli LUN contiene i dati correlati al LUN.
+** Quando si utilizza il protocollo NVMe/TCP o NVMe/FC per il datastore VMFS, la pagina dei dettagli del namespace contiene dati correlati al namespace.
+
+
+
+
+
+
+== Viste dello storage ONTAP per i datastore vVol
+
+.Fasi
+. Dal client vSphere, accedere al datastore vVols.
+. Fare clic sulla scheda *Configura* nel riquadro di destra.
+. Selezionare *NetApp ONTAP tools* > *archiviazione ONTAP*.
+. La vista dello storage ONTAP elenca tutti i volumi. È possibile espandere o rimuovere lo spazio di archiviazione dal riquadro di archiviazione di ONTAP.
++
+Seguire le istruzioni nella link:../manage/expand-storage-of-vvol-datastore.html["Espandere vVol Datastore"] sezione per aggiungere il datastore vVol e link:../manage/remove-storage-from-a-vvols-datastore.html["Restringere il datastore vVol"] la sezione per eliminare il datastore.
+
+

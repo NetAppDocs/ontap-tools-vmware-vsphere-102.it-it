@@ -1,0 +1,41 @@
+---
+permalink: protect/pair-protected-and-recovery-sites.html 
+sidebar: sidebar 
+keywords:  
+summary: 'È necessario associare i siti protetti e di ripristino creati utilizzando il client vSphere per consentire all"adattatore di replica di archiviazione \(SRA\) di rilevare i sistemi di archiviazione.' 
+---
+= Associare siti protetti e di ripristino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario associare i siti protetti e di ripristino creati utilizzando il client vSphere per consentire l'individuazione dei sistemi di storage mediante Storage Replication Adapter (SRA).
+
+
+NOTE: Storage Replication Adapter (SRA) non supporta le configurazioni di SnapMirror fan-out. Le configurazioni fan-out di SnapMirror sono quelle in cui un volume di origine viene replicato in due diverse destinazioni. Questi creano un problema durante il ripristino quando VMware Live Site Recovery deve ripristinare la macchina virtuale dalla sua destinazione.
+
+*Cosa ti serve*
+
+* È necessario che VMware Live Site Recovery sia installato sui siti protetti e di ripristino.
+* È necessario che SRA sia installato nei siti protetti e di ripristino.
+
+
+*Fasi*
+
+. Fare doppio clic su *Site Recovery* nella home page di vSphere Client e fare clic su *Sites*.
+. Fare clic su *oggetti* > *azioni* > *Associa siti*.
+. Nella finestra di dialogo *Pair Site Recovery Manager Servers*, immettere l'indirizzo del Platform Services Controller del sito protetto, quindi fare clic su *Next*.
+. Nella sezione Select vCenter Server (Seleziona server vCenter), procedere come segue:
++
+.. Verificare che vCenter Server del sito protetto venga visualizzato come candidato corrispondente per l'associazione.
+.. Immettere le credenziali amministrative SSO, quindi fare clic su *fine*.
+
+
+. Se richiesto, fare clic su *Sì* per accettare i certificati di protezione.
+
+
+*Risultato*
+
+I siti protetti e di ripristino vengono visualizzati nella finestra di dialogo oggetti.

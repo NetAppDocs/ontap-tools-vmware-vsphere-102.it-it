@@ -1,0 +1,75 @@
+---
+permalink: concepts/vcenter-server-permissions.html 
+sidebar: sidebar 
+keywords:  
+summary: VCenter Server riconosce le autorizzazioni e non i privilegi. Ogni autorizzazione vCenter Server è composta da tre componenti. 
+---
+= Componenti delle autorizzazioni vCenter Server
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+VCenter Server riconosce le autorizzazioni e non i privilegi. Ogni autorizzazione vCenter Server è composta da tre componenti.
+
+VCenter Server include i seguenti componenti:
+
+* Uno o più privilegi (il ruolo)
++
+I privilegi definiscono le attività che un utente può eseguire.
+
+* Un oggetto vSphere
++
+L'oggetto è la destinazione delle attività.
+
+* Un utente o un gruppo
++
+L'utente o il gruppo definisce chi può eseguire l'attività.
+
+
+
+
+NOTE: In questo diagramma, le caselle grigie indicano i componenti presenti in vCenter Server e le caselle bianche indicano i componenti presenti nel sistema operativo in cui è in esecuzione vCenter Server.
+
+image:../media/permission-updated-graphic.gif["illustrazione dei componenti dei permessi"]
+
+
+
+== Privilegi
+
+Due tipi di privilegi sono associati ai tool ONTAP per VMware vSphere:
+
+* Privilegi vCenter Server nativi
++
+Questi privilegi vengono forniti con vCenter Server.
+
+* Privilegi specifici per i tool ONTAP
++
+Questi privilegi sono definiti per strumenti ONTAP specifici per le attività VMware vSphere. Sono esclusivi dei tool ONTAP per VMware vSphere.
+
+
+
+Gli strumenti ONTAP per le attività VMware vSphere richiedono privilegi specifici di ONTAP e privilegi nativi di vCenter Server. Questi privilegi costituiscono "`role`" per l'utente. Un'autorizzazione può avere più privilegi. Questi privilegi sono riservati a un utente che ha effettuato l'accesso a vCenter Server.
+
+
+NOTE: Per semplificare le operazioni con vCenter Server RBAC, gli strumenti ONTAP per VMware vSphere forniscono diversi ruoli standard che contengono tutti i privilegi nativi e specifici degli strumenti ONTAP necessari per eseguire gli strumenti ONTAP per i task VMware vSphere.
+
+Se si modificano i privilegi all'interno di un'autorizzazione, l'utente associato a tale autorizzazione deve disconnettersi e quindi accedere per attivare l'autorizzazione aggiornata.
+
+
+
+== Oggetti vSphere
+
+Le autorizzazioni sono associate agli oggetti vSphere, come vCenter Server, host ESXi, macchine virtuali, datastore, data center, e cartelle. È possibile assegnare autorizzazioni a qualsiasi oggetto vSphere. In base all'autorizzazione assegnata a un oggetto vSphere, vCenter Server determina chi può eseguire le attività su tale oggetto. Per gli strumenti ONTAP per attività specifiche di VMware vSphere, le autorizzazioni vengono assegnate e convalidate solo a livello di cartella principale (vCenter Server) e non su altre entità. Ad eccezione del funzionamento del plug-in VAAI, in cui le autorizzazioni vengono convalidate per l'host ESXi interessato.
+
+
+
+== Utenti e gruppi
+
+È possibile utilizzare Active Directory (o la macchina vCenter Server locale) per configurare utenti e gruppi di utenti. È quindi possibile utilizzare le autorizzazioni di vCenter Server per concedere l'accesso a questi utenti o gruppi per consentire loro di eseguire strumenti ONTAP specifici per i task di VMware vSphere.
+
+
+NOTE: Queste autorizzazioni di vCenter Server si applicano agli strumenti ONTAP per gli utenti di VMware vSphere vCenter, non agli strumenti ONTAP per gli amministratori di VMware vSphere. Per impostazione predefinita, gli strumenti ONTAP per gli amministratori di VMware vSphere dispongono dell'accesso completo al prodotto e non richiedono le autorizzazioni assegnate.
+
+Gli utenti e i gruppi non hanno ruoli assegnati. Ottengono l'accesso a un ruolo facendo parte di un'autorizzazione vCenter Server.

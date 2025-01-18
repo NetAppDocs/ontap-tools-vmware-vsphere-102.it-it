@@ -1,0 +1,86 @@
+---
+permalink: configure/esxi-host-values.html 
+sidebar: sidebar 
+keywords:  
+summary: È possibile impostare timeout e altri valori sugli host ESXi utilizzando gli strumenti ONTAP per VMware vSphere per garantire le migliori performance e il failover corretto. I valori dei tool ONTAP per i set VMware vSphere si basano su test NetApp interni. 
+---
+= Impostare i valori dell'host ESXi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile impostare timeout e altri valori sugli host ESXi utilizzando gli strumenti ONTAP per VMware vSphere per garantire le migliori performance e il failover corretto. I valori dei tool ONTAP per i set VMware vSphere si basano su test NetApp interni.
+
+È possibile impostare i seguenti valori su un host ESXi:
+
+
+
+== Impostazioni adattatore HBA/CNA
+
+Consente di impostare le impostazioni di timeout dell'HBA consigliate per i sistemi di archiviazione NetApp.
+
+* *Disk.QFullSampleSize*
++
+Impostare questo valore su 32 per tutte le configurazioni. L'impostazione di questo valore aiuta a prevenire gli errori di i/O.
+
+* *Disk.QFullThreshold*
++
+Impostare questo valore su 8 per tutte le configurazioni. L'impostazione di questo valore aiuta a prevenire gli errori di i/O.
+
+* *Timeout HBA FC Emulex*
++
+Utilizzare il valore predefinito.
+
+* *Timeout HBA FC QLogic*
++
+Utilizzare il valore predefinito.
+
+
+
+
+
+== Impostazioni MPIO
+
+Le impostazioni MPIO definiscono i percorsi preferiti per i sistemi storage NetApp. Le impostazioni MPIO determinano quali percorsi disponibili sono ottimizzati (rispetto ai percorsi non ottimizzati che attraversano il cavo di interconnessione) e impostano il percorso preferito verso uno di tali percorsi.
+
+Negli ambienti a performance elevate o quando si eseguono test delle performance con un singolo datastore LUN, prendere in considerazione la possibilità di modificare l'impostazione del bilanciamento del carico della policy di selezione del percorso psp (round-robin) VMW_PSP_RR (Path Selection Policy) dall'impostazione IOPS predefinita di 1000 a un valore di 1.
+
+
+
+== Impostazioni NFS
+
+* *Net.TcpipelHeapSize*
++
+Impostare questo valore su 32.
+
+* *Net.TcpipelHeapMax*
++
+Impostare questo valore su 1024 MB.
+
+* *NFS.MaxVolumes*
++
+Impostare questo valore su 256.
+
+* *NFS41.MaxVolumes*
++
+Impostare questo valore su 256.
+
+* *NFS.MaxQueueDepth*
++
+Impostare questo valore su 128 o superiore per evitare colli di bottiglia in coda.
+
+* *NFS.HeartbeatMaxFailures*
++
+Impostare questo valore su 10 per tutte le configurazioni NFS.
+
+* *NFS.HeartbeatFrequency*
++
+Impostare questo valore su 12 per tutte le configurazioni NFS.
+
+* *NFS.HeartbeatTimeout*
++
+Impostare questo valore su 5 per tutte le configurazioni NFS.
+
+

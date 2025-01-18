@@ -1,0 +1,8 @@
+---
+section: automation
+title: Automatizzare utilizzando le API REST
+entries:
+- title: Panoramica delle API REST
+  url: "/automation/overview-rest-apis.html"
+- title: Inizia con L'API REST
+  url: "/automation/get-started-with-the-rest-api.html"

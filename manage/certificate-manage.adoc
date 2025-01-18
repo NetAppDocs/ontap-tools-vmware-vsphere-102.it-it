@@ -1,0 +1,39 @@
+---
+permalink: manage/certificate-manage.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Una singola istanza dei tool ONTAP per VMware vSphere può gestire più istanze di vCenter Server. I tool ONTAP per VMware vSphere vengono implementati con un certificato autofirmato per il provider VASA. Con questo, è possibile gestire solo un"istanza di vCenter Server per i datastore vVol.' 
+---
+= Gestire i certificati
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una singola istanza dei tool ONTAP per VMware vSphere può gestire più istanze di vCenter Server. I tool ONTAP per VMware vSphere vengono implementati con un certificato autofirmato per il provider VASA. Con questo, è possibile gestire solo un'istanza di vCenter Server per i datastore vVol. Quando si gestiscono più istanze di vCenter Server e si desidera abilitare la funzionalità vVol su più istanze di vCenter Server, è necessario modificare il certificato autofirmato in certificato CA personalizzato utilizzando l'interfaccia di ONTAP Tools Manager. È possibile utilizzare la stessa interfaccia per rinnovare o aggiornare tutti i certificati.
+
+
+NOTE: Un diverso indirizzo IP del sistema di bilanciamento del carico mappato a domini diversi non è supportato quando si esegue l'aggiornamento della CA autofirmata alla CA personalizzata.
+
+*Fasi*
+
+. Avviare Gestione strumenti ONTAP da un browser Web: `\https://loadBalanceIP:8443/virtualization/ui/`
+. Effettua l'accesso con i tool ONTAP per le credenziali di amministratore di VMware vSphere fornite durante l'implementazione.
+. Selezionare *certificati* > *provider VASA* > *Rinnova* per rinnovare i certificati.
++
+
+NOTE: Il sistema non sarà in linea fino a quando il certificato non sarà rinnovato.
+
+. Per aggiornare il certificato autofirmato al certificato CA personalizzato, selezionare l'opzione *certificati* > *provider VASA* > *Aggiorna a CA*.
++
+.. Nella finestra a comparsa *Aggiorna certificato alla CA* personalizzata, caricare il certificato del server, la chiave privata del certificato del server, il certificato della CA principale e i file di certificato intermedio. La descrizione dei certificati viene fornita nella descrizione.
+.. Immettere il nome di dominio per il quale è stato generato il certificato.
+.. Fare clic su *Upgrade* (Aggiorna).
++
+
+NOTE: Il sistema non sarà in linea fino al completamento dell'aggiornamento.
+
+
+
+

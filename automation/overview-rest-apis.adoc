@@ -1,0 +1,88 @@
+---
+permalink: automation/overview-rest-apis.html 
+sidebar: sidebar 
+keywords: REST APIs, swagger 
+summary: Viene descritto come utilizzare le API REST per eseguire diversi tool ONTAP per le operazioni di gestione di VMware vSphere. Le API REST sono esposte attraverso la pagina web di Swagger. 
+---
+= Panoramica delle API REST
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le API REST possono essere utilizzate per eseguire diversi tool ONTAP per le operazioni di gestione di VMware vSphere. Le API REST sono esposte attraverso la pagina web di Swagger.
+
+È possibile accedere alla pagina Web Swagger disponibile su _\https://loadbalancerIP:8443/_ per visualizzare la documentazione dell'API REST e per eseguire manualmente una chiamata API.
+
+
+NOTE: Tutte le API hanno un corpo di richiesta ed esempi menzionati nella pagina swagger. I flussi di lavoro e gli esempi forniti in questa sezione sono solo a scopo di riferimento.
+
+
+
+== Come accedere ai tool ONTAP per l'API REST di VMware vSphere
+
+È possibile accedere all'API REST di ONTAP in diversi modi.
+
+
+
+== Considerazioni sulla rete
+
+È possibile connettersi all'API REST tramite le seguenti interfacce:
+
+* LIF gestione cluster
+* LIF di gestione dei nodi
+* LIF gestione SVM
+
+
+La LIF che scegli di utilizzare deve essere configurata in modo da supportare il protocollo di gestione HTTPS. Inoltre, la configurazione del firewall nella rete dovrebbe consentire il traffico HTTPS.
+
+
+NOTE: Si consiglia di utilizzare sempre una LIF di gestione del cluster. In questo modo, le richieste API vengono bilanciate in tutti i nodi ed è possibile evitare i nodi offline o che presentano problemi di connettività. Se sono configurate più LIF di gestione del cluster, sono tutte equivalenti per quanto riguarda l'accesso all'API REST.
+
+
+
+== Pagina della documentazione online dei tool ONTAP per l'API VMware vSphere
+
+È possibile accedere a Swagger dal collegamento ipertestuale nella pagina di supporto dei tool NetApp ONTAP per il plug-in VMware vSphere.
+
+Il formato dell'URL utilizzato per accedere alla pagina della documentazione relativa alla versione più recente dell'API è:
+
+`https://<loadbalancer_ip_address>/docs/api'
+
+
+
+== Software e tool personalizzati
+
+Puoi accedere ai tool ONTAP per le API VMware vSphere utilizzando diversi linguaggi e tool di programmazione. Le scelte più popolari includono Python, Java, Curl e PowerShell. Un programma, uno script o uno strumento che utilizza l'API agisce come un client di servizi Web REST. L'utilizzo di un linguaggio di programmazione consente una conoscenza più approfondita dell'API e offre l'opportunità di automatizzare gli strumenti ONTAP per l'amministrazione di VMware vSphere.
+
+Il formato dell'URL di base utilizzato per accedere direttamente alla versione più recente dell'API è:
+
+`https://<loadbalancer_ip_address>/api'
+
+Per accedere a una versione API specifica in cui sono supportate più versioni, il formato dell'URL è:
+
+`https://<loadbalancer_ip_address>/api/v1'
+
+
+
+== Accedi ai tool ONTAP per la documentazione di riferimento dell'API VMware vSphere tramite l'interfaccia utente Swagger
+
+È possibile accedere alla documentazione dell'API REST ONTAP tramite l'interfaccia utente Swagger nel sistema ONTAP locale.
+
+*Prima di iniziare*
+
+Dovresti disporre di quanto segue:
+
+* Indirizzo IP o nome host della LIF di gestione del cluster ONTAP
+* Nome utente e password per un account con autorizzazione ad accedere all'API REST ONTAP
+
+
+.Fasi
+. Digitare l'URL nel browser e premere *Invio*: _\https://<ip_address>/docs/api_
+. Accedi utilizzando l'account ONTAP
++
+Viene visualizzata la pagina della documentazione API ONTAP con le chiamate API organizzate in base alle principali categorie di risorse.
+
+. Come esempio di una singola chiamata API, scorrere verso il basso fino alla categoria *cluster* e fare clic su *GET /cluster*.
+

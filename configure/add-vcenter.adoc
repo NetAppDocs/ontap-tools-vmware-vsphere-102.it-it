@@ -1,0 +1,37 @@
+---
+permalink: configure/add-vcenter.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Le istanze di vCenter Server sono le piattaforme di gestione centrali che consentono di controllare host, macchine virtuali (VM) e backend dello storage.' 
+---
+= Aggiungere istanze di vCenter Server
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+VCenter Server offre la piattaforma di gestione centrale che consente di controllare host, macchine virtuali (VM) e backend dello storage.
+
+*A proposito di questa attività*
+
+Puoi aggiungere e gestire più istanze di vCenter Server con una sola istanza dei tool ONTAP per VMware vSphere.
+
+*Fasi*
+
+. Avviare Gestione strumenti ONTAP da un browser Web: `\https://loadBalanceIP:8443/virtualization/ui/`
+. Effettua l'accesso con i tool ONTAP per le credenziali di amministratore di VMware vSphere fornite durante l'implementazione.
+. Selezionare *vCenters* dalla barra laterale.
+. Selezionare *Aggiungi* per le istanze di vCenter Server integrate e fornire l'indirizzo IP/nome host vCenter, il nome utente, la password e i dettagli della porta.
+
+
+Quando si aggiunge un'istanza di vCenter Server agli strumenti ONTAP, vengono eseguite automaticamente le seguenti azioni:
+
+* Il plug-in del client vCenter è registrato
+* I privilegi personalizzati per i plug-in e le API vengono inviati all'istanza di vCenter Server
+* Per gestire gli utenti vengono creati ruoli personalizzati.
+
+
+Quando si aggiunge un'istanza di vCenter Server, gli strumenti ONTAP per il plug-in VMware vSphere vengono registrati automaticamente in vCenter Server come plug-in remoto. Il plug-in è visibile nei collegamenti dell'interfaccia utente di vSphere.
+
+Il plug-in viene registrato con la chiave _com.netapp.otv_ dell'istanza di vCenter Server ed è visibile in ExtensionManager dell'istanza di vCenter Server.

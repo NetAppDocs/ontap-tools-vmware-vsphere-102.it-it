@@ -1,0 +1,10 @@
+---
+section: deploy
+title: Implementa i tool ONTAP per VMware vSphere
+entries:
+- title: Prerequisiti
+  url: "/deploy/prerequisites.html"
+- title: Implementare gli strumenti ONTAP
+  url: "/deploy/ontap-tools-deployment.html"
+- title: Codici di errore di distribuzione
+  url: "/deploy/deployment-error-codes.html"
