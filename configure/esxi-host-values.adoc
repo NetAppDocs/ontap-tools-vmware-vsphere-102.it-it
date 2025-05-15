@@ -19,24 +19,12 @@ summary: È possibile impostare timeout e altri valori sugli host ESXi utilizzan
 
 == Impostazioni adattatore HBA/CNA
 
-Consente di impostare le impostazioni di timeout dell'HBA consigliate per i sistemi di archiviazione NetApp.
+Imposta i seguenti parametri sui valori predefiniti:
 
-* *Disk.QFullSampleSize*
-+
-Impostare questo valore su 32 per tutte le configurazioni. L'impostazione di questo valore aiuta a prevenire gli errori di i/O.
-
-* *Disk.QFullThreshold*
-+
-Impostare questo valore su 8 per tutte le configurazioni. L'impostazione di questo valore aiuta a prevenire gli errori di i/O.
-
-* *Timeout HBA FC Emulex*
-+
-Utilizzare il valore predefinito.
-
-* *Timeout HBA FC QLogic*
-+
-Utilizzare il valore predefinito.
-
+* Disk.QFullSampleSize
+* Disk.QFullThreshold
+* Timeout HBA FC Emulex
+* Timeout HBA FC QLogic
 
 
 

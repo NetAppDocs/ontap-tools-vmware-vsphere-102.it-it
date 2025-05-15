@@ -594,14 +594,6 @@
   <block id="a883deebdfbfeb611d06d3f55178ccbf" category="doc">Impostare i valori dell'host ESXi</block>
   <block id="9232ab7e918fc93452c2dc7c8fab1b8c" category="paragraph">È possibile impostare i seguenti valori su un host ESXi:</block>
   <block id="ab9d8dfb65807487a899df1683e128fa" category="section-title">Impostazioni adattatore HBA/CNA</block>
-  <block id="d3c41b5a4cf556f3a598cc1221e08ee4" category="paragraph">Consente di impostare le impostazioni di timeout dell'HBA consigliate per i sistemi di archiviazione NetApp.</block>
-  <block id="15ed0ba40712ee81b72a8792c890eedc" category="list-text">*Disk.QFullSampleSize*</block>
-  <block id="66ea40466e5ef8258f8b6db3cdc7106f" category="paragraph">Impostare questo valore su 32 per tutte le configurazioni. L'impostazione di questo valore aiuta a prevenire gli errori di i/O.</block>
-  <block id="39588925ce067cdd61e04bbd64e51dcb" category="list-text">*Disk.QFullThreshold*</block>
-  <block id="9bd553240078f69295a0b47ce73fd074" category="paragraph">Impostare questo valore su 8 per tutte le configurazioni. L'impostazione di questo valore aiuta a prevenire gli errori di i/O.</block>
-  <block id="81ec4070dd281a6d1920f79a9ecb8f0d" category="list-text">*Timeout HBA FC Emulex*</block>
-  <block id="b4dbfc2d52627e923cbb563a31ff756d" category="paragraph">Utilizzare il valore predefinito.</block>
-  <block id="5ecf7b7910834f22ac8988030833dbcc" category="list-text">*Timeout HBA FC QLogic*</block>
   <block id="c803cf4eb4cbf3a6b12b1e1cc3443970" category="section-title">Impostazioni MPIO</block>
   <block id="ce2fddb4782cb083028eb028f1b74ba0" category="paragraph">Le impostazioni MPIO definiscono i percorsi preferiti per i sistemi storage NetApp. Le impostazioni MPIO determinano quali percorsi disponibili sono ottimizzati (rispetto ai percorsi non ottimizzati che attraversano il cavo di interconnessione) e impostano il percorso preferito verso uno di tali percorsi.</block>
   <block id="d16644a258624270fbc604b4a9c10811" category="paragraph">Negli ambienti a performance elevate o quando si eseguono test delle performance con un singolo datastore LUN, prendere in considerazione la possibilità di modificare l'impostazione del bilanciamento del carico della policy di selezione del percorso psp (round-robin) VMW_PSP_RR (Path Selection Policy) dall'impostazione IOPS predefinita di 1000 a un valore di 1.</block>
@@ -1797,7 +1789,6 @@
   <block id="48bc2d028cb2a507ef974230ca3ba793" category="sidebar">Configurare la diagnostica remota</block>
   <block id="eaf78ca462bf848b7c59c410077002b6" category="sidebar">Proteggi i tuoi datastore</block>
   <block id="dfcc398099d6a64026e51ab282e16253" category="sidebar">Più risorse</block>
-  <block id="c8af2a359991324c5027f67981fcf118" category="sidebar">Documentazione dei tool ONTAP per VMware vSphere 10,1</block>
   <block id="425e3f9f511fc3cc32fb57688da1ec81" category="sidebar">Documentazione per le versioni precedenti dei tool ONTAP per VMware vSphere 9</block>
   <block id="4c3c39a603eb21106d2df2836d4b456c" category="sidebar">Knowledge base di NetApp - Tool ONTAP</block>
   <block id="72393f9ef0b6b69526a30ac7ce5276bc" category="sidebar">Community NetApp - Tool ONTAP</block>
@@ -1837,4 +1828,9 @@
   <block id="5dd03e8d039863e563e049be198c3fd3" category="sidebar">Note di rilascio</block>
   <block id="ed8359854c43609fca7bc8a46cca9eac" category="sidebar">Confronto tra le funzionalità di ONTAP Tools 9 e ONTAP Tools 10</block>
   <block id="a2fa58344be7fbd9a2be0320a8df0f77" category="sidebar">Aggiornare i tool ONTAP</block>
+  <block id="395ddb6ca1b9948e32145f8fa1a9201e" category="paragraph">Imposta i seguenti parametri sui valori predefiniti:</block>
+  <block id="117704664d6cada78ac3107380f63d23" category="list-text">Disk.QFullSampleSize</block>
+  <block id="f66a3c183f0e736240b77f8b755c880e" category="list-text">Disk.QFullThreshold</block>
+  <block id="19c08de7404551288e1274186e039ef4" category="list-text">Timeout HBA FC Emulex</block>
+  <block id="d46cddda4da7ec11f17472d11df95b68" category="list-text">Timeout HBA FC QLogic</block>
 </blocks>
