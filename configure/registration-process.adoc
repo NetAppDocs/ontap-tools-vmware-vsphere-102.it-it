@@ -11,7 +11,7 @@ summary: 'È possibile registrare e annullare la registrazione del provider VASA
 
 
 [role="lead"]
-È possibile registrare e annullare la registrazione del provider VASA con un'istanza di vCenter Server utilizzando gli strumenti ONTAP per l'interfaccia di plug-in remoto di VMware vSphere. La sezione Impostazioni provider VASA mostra lo stato di registrazione provider VASA per vCenter Server selezionato.
+Puoi registrare il provider VASA con un'istanza di vCenter Server utilizzando i tool ONTAP per VMware vSphere. La sezione Impostazioni provider VASA visualizza lo stato di registrazione provider VASA per vCenter Server selezionato. In una distribuzione multi-vCenter, assicurati di disporre di certificati CA personalizzati per ogni istanza di vCenter Server.
 
 *Fasi*
 

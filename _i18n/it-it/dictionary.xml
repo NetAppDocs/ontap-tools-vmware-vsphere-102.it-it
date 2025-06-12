@@ -342,7 +342,6 @@
   <block id="7f2d9eb042fad8493c138993f867cd80" category="paragraph">L'elenco viene aggiornato ed è possibile visualizzare il backend dello storage appena aggiunto nell'elenco.</block>
   <block id="f6c30a782639c90ebe44f3f343922077" category="summary">Le istanze di vCenter Server sono le piattaforme di gestione centrali che consentono di controllare host, macchine virtuali (VM) e backend dello storage.</block>
   <block id="6245e46af5a3bdaf57696763c4214c70" category="doc">Aggiungere istanze di vCenter Server</block>
-  <block id="9a22df67797f0968951385551d26d202" category="paragraph">VCenter Server offre la piattaforma di gestione centrale che consente di controllare host, macchine virtuali (VM) e backend dello storage.</block>
   <block id="aaf638e0edd71bac35fef1b1149f3843" category="paragraph">Puoi aggiungere e gestire più istanze di vCenter Server con una sola istanza dei tool ONTAP per VMware vSphere.</block>
   <block id="0336e0a2e9f5b95c0d4178d3186ecbf6" category="list-text">Selezionare *vCenters* dalla barra laterale.</block>
   <block id="4287076fd3b7cc772889cb75d012c773" category="list-text">Selezionare *Aggiungi* per le istanze di vCenter Server integrate e fornire l'indirizzo IP/nome host vCenter, il nome utente, la password e i dettagli della porta.</block>
@@ -676,7 +675,6 @@
   <block id="02ecc951ba9c7de4ba8def4213f1982e" category="list-text">Per visualizzare i cluster host protetti, accedere a *NetApp ONTAP tools* &gt; *protezione* &gt; *Relazioni cluster host*.</block>
   <block id="88cea8a228e76d96b5b014b926e19795" category="summary">È possibile registrare e annullare la registrazione del provider VASA con un'istanza di vCenter Server utilizzando gli strumenti ONTAP per l'interfaccia di plug-in remoto di VMware vSphere.</block>
   <block id="062e7967273cea76dff9c3579a0c44db" category="doc">Registrare il provider VASA con un'istanza di vCenter Server</block>
-  <block id="b59d64b98fd315f6b2bb4cfbeef9a7fd" category="paragraph">È possibile registrare e annullare la registrazione del provider VASA con un'istanza di vCenter Server utilizzando gli strumenti ONTAP per l'interfaccia di plug-in remoto di VMware vSphere. La sezione Impostazioni provider VASA mostra lo stato di registrazione provider VASA per vCenter Server selezionato.</block>
   <block id="711a24c1ed1e14106df5e83af675d10f" category="list-text">Selezionare *Impostazioni* &gt; *Impostazioni provider VASA*. Lo stato di registrazione del provider VASA viene visualizzato come non registrato.</block>
   <block id="7bd80420c7575554792093f90dbbe6ed" category="list-text">Fare clic sul pulsante *registra* per registrare il provider VASA.</block>
   <block id="2a8034ce8dbfe14fabe94e3ca6c7b860" category="list-text">Immettere un nome per il provider VASA e fornire gli strumenti ONTAP per le credenziali utente dell'applicazione VMware vSphere, quindi fare clic su *REGISTRA*.</block>
@@ -1833,4 +1831,7 @@
   <block id="f66a3c183f0e736240b77f8b755c880e" category="list-text">Disk.QFullThreshold</block>
   <block id="19c08de7404551288e1274186e039ef4" category="list-text">Timeout HBA FC Emulex</block>
   <block id="d46cddda4da7ec11f17472d11df95b68" category="list-text">Timeout HBA FC QLogic</block>
+  <block id="a9a74d98e6d11230d876df92acb424fd" category="paragraph">Aggiungi le istanze di vCenter Server ai tool ONTAP per VMware vSphere per configurare, gestire e proteggere i datastore virtuali nel tuo ambiente vCenter Server. Quando si aggiungono più istanze di vCenter Server, sono richiesti certificati CA personalizzati per la comunicazione sicura tra gli strumenti ONTAP e ciascun vCenter Server.</block>
+  <block id="56564ecb20e9cb45429b432b22f216f4" category="admonition">Le impostazioni MPIO non si applicano ai protocolli NVMe, NVMe/FC e NVMe/TCP.</block>
+  <block id="07c9ecda15aaf26d8eef3770025ec27c" category="paragraph">Puoi registrare il provider VASA con un'istanza di vCenter Server utilizzando i tool ONTAP per VMware vSphere. La sezione Impostazioni provider VASA visualizza lo stato di registrazione provider VASA per vCenter Server selezionato. In una distribuzione multi-vCenter, assicurati di disporre di certificati CA personalizzati per ogni istanza di vCenter Server.</block>
 </blocks>
